@@ -27,12 +27,12 @@ def convert_avi_to_mp4(input_avi, output_dir):
     """Converts AVI video to MP4 format."""
     mp4_output_file = os.path.join(output_dir, "output_video.mp4")
     os.system(f"ffmpeg -i \"{input_avi}\" -c:v libx264 -preset slow -b:v 1000k -r 10 -pix_fmt yuv420p \"{mp4_output_file}\"")
-    print(f"✅ Converted AVI to MP4: {mp4_output_file}")
+    print(f"Converted AVI to MP4: {mp4_output_file}")
     return mp4_output_file
 
 def process_text_to_video(input_text_file, output_dir):
     """Handles text-to-video conversion"""
-    print("🔄 Converting Text to Video...")
+    print("Converting Text to Video...")
     video_output_file = os.path.join(output_dir, "output_video.avi")
     
     text = load_text_from_file(input_text_file)
@@ -44,13 +44,13 @@ def process_text_to_video(input_text_file, output_dir):
     binary_to_image(binary_data, output_image)
     
     images_to_video(frame_output_folder, video_output_file)
-    print(f"✅ Video saved to {video_output_file}")
+    print(f"Video saved to {video_output_file}")
     
     convert_avi_to_mp4(video_output_file, output_dir)
 
 def process_video_to_text(input_video_file, output_dir):
     """Handles video-to-text conversion"""
-    print("🔄 Converting Video to Text...")
+    print("Converting Video to Text...")
     reconstructed_text_file = os.path.join(output_dir, "reconstructed_text.txt")
     
     extracted_frames_folder = os.path.join(output_dir, "extracted_frames/")
@@ -59,22 +59,22 @@ def process_video_to_text(input_video_file, output_dir):
     
     binary_data = frames_to_binary(extracted_frames_folder)
     save_text_from_binary(binary_data, reconstructed_text_file)
-    print(f"✅ Reconstructed text saved to {reconstructed_text_file}")
+    print(f"Reconstructed text saved to {reconstructed_text_file}")
 
 def main():
-    print("📌 Welcome to the Text-to-Video Encryption System!")
-    print("🔹 Please select a file to process:")
+    print("Welcome to the Text-to-Video Encryption System!")
+    print("Please select a file to process:")
     file_path = select_file()
     
     if not file_path:
-        print("❌ No file selected. Exiting...")
+        print("No file selected. Exiting...")
         return
     
-    print("🔹 Please select an output directory:")
+    print("Please select an output directory:")
     output_dir = select_output_directory()
     
     if not output_dir:
-        print("❌ No output directory selected. Exiting...")
+        print("No output directory selected. Exiting...")
         return
     
     file_ext = os.path.splitext(file_path)[1].lower()
@@ -84,10 +84,10 @@ def main():
     elif file_ext in [".avi", ".mp4"]:
         process_video_to_text(file_path, output_dir)
     else:
-        print("❌ Unsupported file type. Please select a .txt or .avi/.mp4 file.")
+        print("Unsupported file type. Please select a .txt or .avi/.mp4 file.")
         return
     
-    print(f"🎉 Process Complete! Check the output in {output_dir}")
+    print(f"Process Complete! Check the output in {output_dir}")
     
 if __name__ == "__main__":
     main()
